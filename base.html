@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gadget Galaxy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        header h1 {
+            text-align: center;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #00509e;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+            color: #555;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Gadget Galaxy</h1>
+</header>
+
+<nav>
+    <a href="{{ url_for('index') }}">Home</a> |
+    <a href="{{ url_for('cart') }}">Cart</a> |
+    <a href="{{ url_for('admin') }}">Admin</a> |
+    {% if session.get('username') %}
+        Welcome {{ session['username'] }} |
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('login') }}">Login</a> |
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+    {% endif %}
+</nav>
+<hr>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+<footer>
+    Developed by <strong>Vignesh Madhav S</strong>
+</footer>
+
+</body>
+</html>

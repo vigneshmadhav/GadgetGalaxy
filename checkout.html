@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Checkout</h1>
+
+{% if products %}
+<p>Thank you for your purchase! Here are the details:</p>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td><img src="{{ url_for('static', filename=product['image']) }}" alt="{{ product['name'] }}" width="100"></td>
+        <td>{{ product['name'] }}</td>
+        <td>₹{{ product['price'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><strong>Total Paid:</strong> ₹{{ total }}</p>
+
+{% else %}
+<p>No products to checkout.</p>
+{% endif %}
+
+<a href="{{ url_for('index') }}">← Back to Home</a>
+{% endblock %}

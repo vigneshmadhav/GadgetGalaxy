@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Admin Panel</h1>
+
+<h2>Add New Product</h2>
+<form method="POST" action="{{ url_for('admin') }}">
+    <label for="name">Product Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="3" required></textarea><br><br>
+    
+    <label for="price">Price (₹):</label><br>
+    <input type="number" id="price" name="price" step="0.01" required><br><br>
+    
+    <label for="image">Image Filename:</label><br>
+    <input type="text" id="image" name="image" required><br>
+    <small>Make sure the image exists in <code>static/images/</code></small><br><br>
+    
+    <input type="submit" value="Add Product">
+</form>
+
+<hr>
+
+<h2>Existing Products</h2>
+{% if products %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price (₹)</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product['id'] }}</td>
+            <td>{{ product['name'] }}</td>
+            <td>{{ product['price'] }}</td>
+            <td>{{ product['image'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No products available.</p>
+{% endif %}
+
+<a href="{{ url_for('index') }}">← Back to Home</a>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Our Products</h1>
+<div class="products">
+    {% for product in products %}
+    <div class="product-card">
+        <!-- Image -->
+        <img src="{{ url_for('static', filename=product['image']) }}" alt="{{ product['name'] }}" width="200">
+
+        <!-- Product Info -->
+        <h3>{{ product['name'] }}</h3>
+        <p>₹{{ product['price'] }}</p>
+
+        <!-- Links -->
+        <a href="{{ url_for('product_detail', id=product['id']) }}">View Details</a> |
+        <a href="{{ url_for('add_to_cart', id=product['id']) }}">Add to Cart</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

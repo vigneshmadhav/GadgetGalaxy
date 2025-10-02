@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ product['name'] }}</h1>
+<div class="product-detail">
+    <!-- Product Image -->
+    <img src="{{ url_for('static', filename=product['image']) }}" alt="{{ product['name'] }}" width="300">
+
+    <!-- Product Info -->
+    <div class="product-info">
+        <p><strong>Price:</strong> ₹{{ product['price'] }}</p>
+        <p><strong>Description:</strong> {{ product['description'] }}</p>
+
+        <!-- Add to Cart -->
+        <a href="{{ url_for('add_to_cart', id=product['id']) }}">Add to Cart</a>
+    </div>
+</div>
+
+<!-- Back to Home -->
+<a href="{{ url_for('index') }}">← Back to Home</a>
+{% endblock %}
